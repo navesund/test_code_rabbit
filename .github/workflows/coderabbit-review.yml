@@ -7,7 +7,6 @@ on:
 jobs:
   code-review:
     runs-on: ubuntu-latest
-
       - name: Run CodeRabbit Review
         uses: coderabbitai/ai-pr-reviewer@v1
         with:
