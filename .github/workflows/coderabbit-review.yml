@@ -1,5 +1,9 @@
 name: CodeRabbit PR Review
 
+permissions:
+  pull-requests: write
+  contents: read
+
 on:
   pull_request:
     types: [opened, synchronize]
@@ -9,8 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run CodeRabbit Review
-        uses: coderabbitai/ai-pr-reviewer@v1
+        uses: coderabbitai/ai-pr-reviewer@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
-          openai_model: gpt-4o-2024-11-20
+          debug: false
+          review_simple_changes: true
+          review_comment_lgtm: false
+          model: gpt-4o-2024-11-20
